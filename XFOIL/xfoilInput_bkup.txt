@@ -1,0 +1,39 @@
+PLOP
+G F
+
+norm
+load XFOIL/morphed.txt
+ppar
+N 160
+P 0.8
+T 1
+
+
+oper
+iter 200
+visc 1e6
+seqp
+pacc
+XFOIL\xfoilSave.txt
+XFOIL\xfoilDump.txt
+alfa -15
+init
+alfa -10
+init
+alfa -5
+init
+alfa 0
+init
+alfa 5
+init
+alfa 10
+init
+alfa 15
+init
+alfa 20
+init
+alfa 25
+init
+alfa 30
+init
+aseq 0 5 0.1

@@ -1,0 +1,14 @@
+PLOP
+G F
+
+norm
+naca 0012
+pane
+ppar
+N 160
+P 0.8
+T 1
+
+
+save
+XFOIL\morphed_repanel.txt
