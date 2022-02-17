@@ -1,4 +1,4 @@
-function [CLD_max,alpha_stall,error_flag]=airfoil_func_calls(varargin)
+function [CLD_max,alpha_stall,error_flag]=airfoil_func_calls_windows(varargin)
 
 error_flag = -1;
 [M, T] = Morphing(varargin{:}); % Change weights here
