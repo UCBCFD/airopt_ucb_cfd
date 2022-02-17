@@ -1,3 +1,8 @@
+# old codes
 /legacy
-*.epf
+# image extensions
+*.eps
+*.png
 *.fig
+# archives
+*.rar
