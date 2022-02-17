@@ -1,13 +1,13 @@
 PLOP
 G F
 
-load XFOIL\morphed_repanel.txt
+load ./XFOIL/morphed_repanel.txt
 pcop
 oper
 iter 50
 visc 1e6
 seqp
 pacc
-XFOIL\xfoilSave.txt
-XFOIL\xfoilDump.txt
-aseq 18.5 26 0.25
+./XFOIL/xfoilSave.txt
+./XFOIL/xfoilDump.txt
+alfa 1

@@ -1,4 +1,4 @@
-function [CLD,CL,alpha_list,miss_count] = xfoil_loop(alpha,alpha_end,alpha_step,miss_threshold,foilname)
+function [CLD,CL,alpha_list,miss_count] = xfoil_loop_windows(alpha,alpha_end,alpha_step,miss_threshold,foilname)
 % LOAD AIRFOIL PROFILE AND CALCULATE CL/CD, CL, ALPHA
 % USAGE:
 % foilname: 'NACA 2142'

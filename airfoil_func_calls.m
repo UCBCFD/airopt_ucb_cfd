@@ -47,7 +47,7 @@ while error_flag < 0 && panel_level < 2 && counter_break<5
     end
     % 2. Save morphed shape
 %     system('del /f XFOIL\morphed_repanel.txt > NUL');
-    system('rm XFOIL/morphed_repanel.txt &> /dev/null');
+    system('rm ./XFOIL/morphed_repanel.txt &> /dev/null');
     fid = fopen('./XFOIL/morphed_repanel.txt', 'w');
     for i = 1:numel(M_undersampled(:,1))
         fprintf(fid,'%15.12f %15.12f\n', M_undersampled(i,:));

@@ -26,6 +26,9 @@ if plot_switch > 0
     hold on
 end
 
+rep_check=V(2:end,1)-V(1:end-1,1);
+rep_ind=find(abs(rep_check)<10^-4);
+V(rep_ind+1,:)=[];
 [~,seglen] = arclength(V(:,1),V(:,2),'spline');
 
 seglen=seglen(2:end)+seglen(1:end-1);
