@@ -57,7 +57,8 @@ while error_flag < 0 && panel_level < 2 && counter_break<5
     % Find CLD_max & alpha_stall
     % If you run XFOIL with this morph...
     if (T == true) % If morphing succeeds..
-        [CLD_max,~,~,alpha_stall,error_flag] = xfoil_scan();
+        [CLD_max,CLD_max_alpha,~,alpha_stall,error_flag] = xfoil_scan();
+        alpha_stall = alpha_stall - CLD_max_alpha;
         if error_flag > 0
             CLD_max = 0;
             alpha_stall = 0;
