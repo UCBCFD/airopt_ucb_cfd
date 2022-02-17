@@ -34,7 +34,7 @@ if and(exist('foilname','var'),~isempty(foilname))
     A{4} = foilname;
 else
 %     A{4} = 'load XFOIL\morphed_repanel.txt';
-    A{4} = 'load XFOIL/morphed_repanel.txt';
+    A{4} = 'load ./XFOIL/morphed_repanel.txt';
 end
 
 % CALCULATION

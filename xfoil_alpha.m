@@ -21,12 +21,12 @@ fclose(fid);
 % RUN XFOIL
 % system('del /f XFOIL\xfoilSave.txt > NUL');
 % system('del /f XFOIL\xfoilDump.txt > NUL');
-system('rm XFOIL/xfoilSave.txt &> /dev/null');
-system('rm XFOIL/xfoilDump.txt &> /dev/null');
+system('rm ./XFOIL/xfoilSave.txt &> /dev/null');
+system('rm ./XFOIL/xfoilDump.txt &> /dev/null');
 
 % system('xfoil.exe < XFOIL\xfoilInput.input')
 % results=evalc("system('xfoil.exe < XFOIL\xfoilInput.input > NUL')");
-results=evalc("system('./xfoil < XFOIL/xfoilInput.input &> /dev/null')");
+results=evalc("system('./xfoil < ./XFOIL/xfoilInput.input &> /dev/null')");
 
 % OPEN XFOIL OUTPUT
 fid = fopen('./XFOIL/xfoilSave.txt');

@@ -1,4 +1,4 @@
-function [output,alpha_return] = xfoil_alpha(alpha, A, flag, alpha_end, alpha_step)
+function [output,alpha_return] = xfoil_alpha_windows(alpha, A, flag, alpha_end, alpha_step)
 
 % UPDATE XFOIL'S INPUT
 if ~exist('alpha_end','var')
