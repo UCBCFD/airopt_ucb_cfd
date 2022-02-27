@@ -27,6 +27,15 @@ angle_threshold = 30;
 smooth_level = 1;
 [M_smooth]=Smoothing(M,angle_threshold,smooth_level);
 
+% If smoothing fails..
+if (sum(isnan(M_smooth),'all') > 0)
+    % Set low values
+    CLD_max = 0;
+    alpha_stall = 0;
+    error_flag = 66;
+    return
+end
+
 % Paneling
 panel_default = 200;
 panel_level = 0;
