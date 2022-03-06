@@ -1,0 +1,16 @@
+# old codes
+/legacy
+# XFOIL inheritance
+/XFOIL/*
+!/XFOIL/xfoilInput.input
+# image extensions
+*.eps
+*.png
+*.fig
+# archives/misc
+*.pdf
+*.rar
+*.exe
+paper*
+xfoil*
+*.bl
