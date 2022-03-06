@@ -1,30 +1,20 @@
-function [V]=Panelling(V,n_seg_max,plot_switch)
+function [V]=Panelling(V,n_seg_max)
 
 % clc;
 % close all;
 % % rad=0.5;
-%min_seg=0.02;
-min_seg=0.01;
-%max_seg=0.06;
-max_seg=0.2;
-
-if nargin < 3
-    plot_switch=0;
-end
+min_seg=0.02;
+max_seg=0.06;
 if nargin < 2
     n_seg_max=200;
 end
-
 % % n_init=80;
 
 % V=readmatrix(sprintf('./BaseShapes/2.txt'));
-if plot_switch > 0
-    x=transpose(V(:,1));
-    y=transpose(V(:,2));
-    figure
-    plot(x,y,'.')
-    hold on
-end
+x=transpose(V(:,1));
+y=transpose(V(:,2));
+% plot(x,y,'.')
+% hold on
 
 rep_check=V(2:end,1)-V(1:end-1,1);
 rep_ind=find(abs(rep_check)<10^-4);
@@ -33,10 +23,9 @@ V(rep_ind+1,:)=[];
 
 seglen=seglen(2:end)+seglen(1:end-1);
 %  || length(seglen)>=n_seg_max
-%while true
-counter_break = 0;
-while counter_break < 5000
-counter_break = counter_break + 1;
+  counter_break=0;
+while counter_break<5000
+counter_break=counter_break+1;
 [M,ind]=min(seglen);
 if M<=min_seg
     if ind==1
@@ -63,11 +52,9 @@ if M<=min_seg
 end
 break
 end
-
-if counter_break == 5000
-	disp(counter_break)
+if counter_break==5000
+      disp(counter_break)
 end
-
 k=LineCurvature2D(V);
 k=k(2:end-1);
 % [arclen,seglen] = arclength(V(:,1),V(:,2),'spline');
@@ -76,10 +63,9 @@ seglen=seglen(2:end)+seglen(1:end-1);
 v_1=V(1,:);
 v_2=V(end,:);
 V=V(2:end-1,:);
-% while true
-counter_break = 0;
-while counter_break <= 10000
-counter_break = counter_break+1;
+counter_break=0;
+while counter_break<=10000
+counter_break=counter_break+1;
 % [M,ind]=min(k);
 [~,ind]=min(k);
 if all(k == k(1))
@@ -118,17 +104,13 @@ end
 V=[v_1;V;v_2];
 V(:,1)=smooth(V(:,1),5);
 V(:,2)=smooth(V(:,2),5);
-if counter_break == 10000
-	disp(counter_break)
+if counter_break==10000
+      disp(counter_break)
 end
 
-
-if plot_switch > 0
-    plot(V(:,1),V(:,2),'*')
-    hold on
-    ylim([-1 1])
-    hold off
-end
+% plot(V(:,1),V(:,2),'*')
+% hold on
+% ylim([-1 1])
 
 end
 

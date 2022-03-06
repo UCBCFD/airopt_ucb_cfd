@@ -4,7 +4,7 @@
 #SBATCH --partition=compute
 #SBATCH --nodes=1
 #SBATCH --ntasks-per-node=128
-#SBATCH --mem=250G
+#SBATCH --mem=249325M
 #SBATCH -t 167:00:00
 #SBATCH --export=ALL
 #SBATCH --account=ucb198

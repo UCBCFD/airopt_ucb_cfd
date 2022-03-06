@@ -1,7 +1,6 @@
 function [M,TFD1]=Morphing(varargin)
 digits(64)
 warning('off','MATLAB:polyshape:repairedBySimplify')
-
 w_tot=0;
 for i=1:nargin
    if i==1

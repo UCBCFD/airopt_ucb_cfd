@@ -1,4 +1,4 @@
-function [CLD_max,alpha_stall,error_flag]=airfoil_func_calls(varargin)
+function [CLD_max,alpha_stall]=airfoil_func_calls(varargin)
 
 error_flag = -1;
 [M, T] = Morphing(varargin{:}); % Change weights here
@@ -42,7 +42,7 @@ panel_level = 0;
 panel_step = 50;
 counter_break=0;
 while error_flag < 0 && panel_level < 2 && counter_break<5
-    counter_break=counter_break+1;    
+    counter_break=counter_break+1;
     panel_current = panel_default + panel_level*panel_step;
     [M]=Panelling(M_smooth,panel_current);
     
@@ -70,8 +70,8 @@ while error_flag < 0 && panel_level < 2 && counter_break<5
     % Find CLD_max & alpha_stall
     % If you run XFOIL with this morph...
     if (T == true) % If morphing succeeds..
-        [CLD_max,CLD_max_alpha,~,alpha_stall,error_flag] = xfoil_scan();
-        alpha_stall = alpha_stall - CLD_max_alpha;
+        [CLD_max,CLD_alpha_max,~,alpha_stall,error_flag] = xfoil_scan();
+        alpha_stall=alpha_stall-CLD_alpha_max;
         if error_flag > 0
             CLD_max = 0;
             alpha_stall = 0;
@@ -96,10 +96,9 @@ if panel_level >= 2 % Can't refine the panel towards convergence
     alpha_stall = 0;
     error_flag = 77;
 end
-if counter_break == 5
-	disp(counter_break)
+if counter_break==5
+  disp(counter_break)
 end
-    
 % ERROR FLAG:
 % 66: failed morphing
 % 77: maximum panel level reached and still no convergence (note: when too
