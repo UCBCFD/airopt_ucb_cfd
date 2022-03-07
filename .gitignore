@@ -1,0 +1,18 @@
+# old codes
+/legacy
+# XFOIL inheritance
+/Airfoil/xfoil
+!/Airfoil/xfoil_*
+/Airfoil/XFOIL/*
+!/Airfoil/XFOIL/xfoilInput.input
+# image extensions
+*.eps
+*.png
+*.fig
+# archives/misc
+*.pdf
+*.rar
+*.exe
+paper*
+*.bl
+log*
