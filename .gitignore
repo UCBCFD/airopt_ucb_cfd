@@ -13,6 +13,8 @@
 *.pdf
 *.rar
 *.exe
+*.txt
 paper*
+xfoil*
 *.bl
 log*

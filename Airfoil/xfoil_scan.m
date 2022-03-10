@@ -77,7 +77,9 @@ if CLD_max-CLD_max_coarse > 15 ...
 || abs(alpha_CLD_max-alpha_list(index_CLD_max_coarse)) > 2
     % WIPE-OUT MEMORY AND REDO CALCULATION AT alpha_CLD_max
     [CLD_max_2,~,~,~] = xfoil_loop(alpha_CLD_max,alpha_CLD_max,0,miss_threshold,foilname);
-    if isempty(CLD_max_2) || ~isnumeric(CLD_max_2) || abs(CLD_max_2-CLD_max) > 15 % HUGE DISCREPANCY -> INCREASE PANELS
+    if isempty(CLD_max_2) || ~isnumeric(CLD_max_2) ...
+    || abs(CLD_max_2-CLD_max_coarse) > 15 ...
+    || abs(CLD_max_2-CLD_max)        > 15 % HUGE DISCREPANCY -> INCREASE PANELS
         alpha_CLD_max = NaN; CLD_max = NaN; alpha_stall = NaN; CL_max = NaN;
         error_flag = -322; 
         return

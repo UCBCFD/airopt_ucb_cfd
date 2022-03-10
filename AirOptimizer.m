@@ -6,14 +6,14 @@ lb=-1*ones(1,25);
 ub=ones(1,25);
 parpool(n_processors,'IdleTimeout', Inf)
 options = optimoptions('ga','ConstraintTolerance',1e-6,'MaxGenerations',100,'PopulationSize',128,'UseParallel',true, 'UseVectorized', false);
-% options = optimoptions('ga','ConstraintTolerance',1e-6,'MaxGenerations',5,'PopulationSize',18, 'UseVectorized', false);
+% options = optimoptions('ga','ConstraintTolerance',1e-6,'MaxGenerations',100,'PopulationSize',128,'UseParallel',true, 'UseVectorized', false, 'Display','iter','OutputFcn',@gaoutfun);
 [gen_intial(1,:),gen_intial_opt(1)]= ga(@(x) airfoil_wrapper_CLD(x),25,[],[],[],[],lb,ub,[],options);
 poolobj = gcp('nocreate');
 delete(poolobj);
 
 parpool(n_processors,'IdleTimeout', Inf)
 options = optimoptions('ga','ConstraintTolerance',1e-6,'MaxGenerations',100,'PopulationSize',128,'UseParallel',true, 'UseVectorized', false);
-% options = optimoptions('ga','ConstraintTolerance',1e-6,'MaxGenerations',5,'PopulationSize',18, 'UseVectorized', false);
+% options = optimoptions('ga','ConstraintTolerance',1e-6,'MaxGenerations',100,'PopulationSize',128,'UseParallel',true, 'UseVectorized', false, 'Display','iter','OutputFcn',@gaoutfun);
 [gen_intial(2,:),gen_intial_opt(2)]= ga(@(x) airfoil_wrapper_AS(x),25,[],[],[],[],lb,ub,[],options);
 poolobj = gcp('nocreate');
 delete(poolobj);
