@@ -9,7 +9,7 @@ alpha_start = 0;
 alpha_end = 40;
 alpha_step_coarse = 1;
 alpha_step_fine   = 0.25;
-miss_threshold = 8;
+miss_threshold = 12;
 alpha_count_fine_CLD = 4;
 alpha_count_fine_CL = 1;
 
@@ -38,7 +38,7 @@ elseif ~isnumeric(CL) || isempty(CL)
 end
 [CLD_max_coarse,index_CLD_max_coarse] = max(CLD);
 [~,index_CL_max] = max(CL);
-miss_threshold=4;
+miss_threshold=8;
 % CLD_max:
 [CLD_R,~,alpha_CLD_list_R,~] = xfoil_loop(alpha_list(index_CLD_max_coarse), ...
     alpha_list(min(index_CLD_max_coarse+alpha_count_fine_CLD,numel(alpha_list))), ...
@@ -98,7 +98,7 @@ end
 % % CL = [CL_L(:);CL_R(:)];
 % % alpha_CL_list = [alpha_CL_list_L(:);alpha_CL_list_R(:)];
 
-miss_threshold = 1;
+miss_threshold = 4;
 [~,CL,alpha_CL_list,~] = xfoil_loop(alpha_CLD_max, ...
     max(alpha_list(min(index_CL_max+alpha_count_fine_CL,numel(alpha_list))), ...
         alpha_CLD_max+alpha_step_fine), ...
@@ -141,8 +141,3 @@ while index_CL <= numel(alpha_CL_list)-1
         return
     end
 end
-
-
-
-
-
