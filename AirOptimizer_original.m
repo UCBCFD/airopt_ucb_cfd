@@ -1,4 +1,4 @@
-n_processors=8;
+n_processors=124;
 % SO Optimums
 gen_intial=zeros(2,25);
 gen_intial_opt=zeros(2,1);
