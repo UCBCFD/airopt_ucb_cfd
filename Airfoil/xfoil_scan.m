@@ -9,7 +9,7 @@ alpha_start = 0;
 alpha_end = 40;
 alpha_step_coarse = 1;
 alpha_step_fine   = 0.25;
-miss_threshold = 8;
+miss_threshold = 12;
 alpha_count_fine_CLD = 4;
 alpha_count_fine_CL = 1;
 
@@ -38,12 +38,12 @@ elseif ~isnumeric(CL) || isempty(CL)
 end
 [CLD_max_coarse,index_CLD_max_coarse] = max(CLD);
 [~,index_CL_max] = max(CL);
-miss_threshold=4;
+miss_threshold=8;
 % CLD_max:
 [CLD_R,~,alpha_CLD_list_R,~] = xfoil_loop(alpha_list(index_CLD_max_coarse), ...
     alpha_list(min(index_CLD_max_coarse+alpha_count_fine_CLD,numel(alpha_list))), ...
     alpha_step_fine,miss_threshold,foilname);
-if isempty(CLD_R) || ~isnumeric(CLD_R) % Fine search can't generate ressult for alpha_CLD_max_coarse
+if isempty(CLD_R) || ~isnumeric(CLD_R) || (alpha_list(index_CLD_max_coarse)+alpha_step_coarse==alpha_list(min(index_CLD_max_coarse+1,numel(alpha_list)))  && ~ismember(alpha_list(index_CLD_max_coarse)+alpha_step_coarse,alpha_CLD_list_R) )  % Fine search can't generate ressult for alpha_CLD_max_coarse
     alpha_CLD_max = NaN; CLD_max = NaN; alpha_stall = NaN; CL_max = NaN;
     error_flag = -320;
     return
@@ -56,6 +56,11 @@ end
 [CLD_L,~,alpha_CLD_list_L,~] = xfoil_loop(alpha_list(index_CLD_max_coarse), ...
     alpha_list(max(index_CLD_max_coarse-alpha_count_fine_CLD,1)), ...
     -alpha_step_fine,miss_threshold,foilname);
+if isempty(CLD_L) || ~isnumeric(CLD_L) || (alpha_list(index_CLD_max_coarse)-alpha_step_coarse==alpha_list(max(index_CLD_max_coarse-1,1)) && ~ismember(alpha_list(index_CLD_max_coarse)-alpha_step_coarse,alpha_CLD_list_L) )
+    alpha_CLD_max = NaN; CLD_max = NaN; alpha_stall = NaN; CL_max = NaN;
+    error_flag = -320;
+    return
+end
 CLD = [CLD_L(:);CLD_R(:)];
 alpha_CLD_list = [alpha_CLD_list_L(:);alpha_CLD_list_R(:)];
 if isempty(CLD)
@@ -98,7 +103,7 @@ end
 % % CL = [CL_L(:);CL_R(:)];
 % % alpha_CL_list = [alpha_CL_list_L(:);alpha_CL_list_R(:)];
 
-miss_threshold = 1;
+miss_threshold = 4;
 [~,CL,alpha_CL_list,~] = xfoil_loop(alpha_CLD_max, ...
     max(alpha_list(min(index_CL_max+alpha_count_fine_CL,numel(alpha_list))), ...
         alpha_CLD_max+alpha_step_fine), ...
@@ -141,8 +146,3 @@ while index_CL <= numel(alpha_CL_list)-1
         return
     end
 end
-
-
-
-
-
