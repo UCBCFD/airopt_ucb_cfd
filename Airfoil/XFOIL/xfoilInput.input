@@ -10,4 +10,4 @@ seqp
 pacc
 ./XFOIL/xfoilSave.txt
 ./XFOIL/xfoilDump.txt
-aseq 12.25 22 0.25
+aseq 0 14 0.25
