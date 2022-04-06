@@ -69,6 +69,7 @@ while coarse_check_pass == 0
     end
 
     if isempty(CLD) || coarse_check_counter > 40
+        alpha_CLD_max = NaN; CLD_max = NaN; alpha_stall = NaN; CL_max = NaN;
         error_flag = 314;
         return
     end
