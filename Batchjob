@@ -5,8 +5,8 @@
 #SBATCH --nodes=1
 #SBATCH --ntasks-per-node=128
 #SBATCH --mem=249325M
-#SBATCH -t 00:20:00
+#SBATCH -t 00:30:00
 #SBATCH --export=ALL
 #SBATCH --account=ucb198
 
-timeout 18m matlab -batch "run('AirOptimizer.m');exit;" 2>&1 | tee log # Change this line
+timeout 25m matlab -batch "run('AirOptimizer.m');exit;" 2>&1 | tee log # Change this line

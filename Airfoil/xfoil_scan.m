@@ -55,7 +55,9 @@ while coarse_check_pass == 0
     end
     CLD_check_diff = triu(CLD_check(:).'-CLD_check(:));
     if numel(alpha_list_check)<3 || max(CLD_check_diff(CLD_check_diff>=0))>50 ...
-            || abs(max(CLD_check)- CLD_max_coarse)>15
+            || abs(max(CLD_check)- CLD_max_coarse)>15 ...
+            || alpha_list_check(1) == alpha_list(index_CLD_max_coarse) ...
+            || alpha_list_check(end) == alpha_list(index_CLD_max_coarse)
         % if more than 2 of the 5 pts dont converge
         % if maximum difference between elements is bigger than 50
         % if the original value is far away from the maximum value
