@@ -13,7 +13,6 @@
 *.pdf
 *.rar
 *.exe
-*.txt
 !InitialGen.txt
 paper*
 xfoil*
