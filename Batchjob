@@ -4,9 +4,25 @@
 #SBATCH --partition=compute
 #SBATCH --nodes=1
 #SBATCH --ntasks-per-node=128
+#SBATCH --cpus-per-task=1
 #SBATCH --mem=249325M
-#SBATCH -t 00:30:00
+#SBATCH -t 48:00:00
 #SBATCH --export=ALL
 #SBATCH --account=ucb198
+#SBATCH --output="Airfoils.%j.%N.out"
+module purge 
+module load cpu
+module load slurm
+module load matlab/2020b
 
-timeout 25m matlab -batch "run('AirOptimizer.m');exit;" 2>&1 | tee log # Change this line
+cp -rf /home/$USER/scratch/airopt_ucb_cfd-main/ /scratch/$USER/job_$SLURM_JOB_ID/
+
+cd /scratch/$USER/job_$SLURM_JOB_ID/airopt_ucb_cfd-main
+
+matlab -batch "run('AirOptimizer.m');exit;" 2>&1 | tee log # Change this line
+
+cd ..
+
+# Move the log file
+mv ./airopt_ucb_cfd-main ./AirOptOut
+cp -r ./* /home/$USER/scratch/airopt_ucb_cfd-main/
