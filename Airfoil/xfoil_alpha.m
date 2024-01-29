@@ -42,17 +42,6 @@ data_raw = textscan(fid,'%f %f %f %f %f %f %f %f %f','HeaderLines',12);
 data_raw = cell2mat(data_raw);
 fclose(fid);
 
-% REMOVE INVALID ROWS
-j = 1;
-for i = 1:size(data_raw,1)
-    if (nnz(isnan(data_raw(j,:))) > 0 ... % if exists NaN
-       || data_raw(j,4)< 0) % CDp (pressure drag) is negative (nonphysical)
-        data_raw(j,:)=[];
-    else
-        j = j + 1;
-    end
-end
-
 % CREATE DATA STRUCTURE
 for i = 1:7
     name = strtrim(convertCharsToStrings(header(i,:)));

@@ -36,48 +36,9 @@ elseif ~isnumeric(CL) || isempty(CL)
     error_flag = 313; % xfoil_alpha fails to read CL (COARSE SEARCH)
     return
 end
-
-% COARSE SEARCH CHECK
-coarse_check_pass = 0;
-coarse_check_counter = 0;
-while coarse_check_pass == 0
-    coarse_check_counter = coarse_check_counter + 1;
-    [CLD_max_coarse,index_CLD_max_coarse] = max(CLD);
-    CLD_check_start = alpha_list(index_CLD_max_coarse)-0.1;
-    CLD_check_end = alpha_list(index_CLD_max_coarse)+0.1;
-    if CLD_check_start*CLD_check_end < 0
-        [CLD_check_L,~,alpha_list_check_L,~] = xfoil_loop(CLD_check_start,0,0.05,5,foilname);
-        [CLD_check_R,~,alpha_list_check_R,~] = xfoil_loop(0,CLD_check_end,0.05,5,foilname);
-        CLD_check = [CLD_check_L(:);CLD_check_R(min(2,numel(CLD_check_R)):end)];
-        alpha_list_check = [alpha_list_check_L(:);alpha_list_check_R(min(2,numel(alpha_list_check_R)):end)];
-    else
-        [CLD_check,~,alpha_list_check,~] = xfoil_loop(CLD_check_start,CLD_check_end,0.05,5,foilname);
-    end
-    CLD_check_diff = triu(CLD_check(:).'-CLD_check(:));
-    if numel(alpha_list_check)<3 || max(CLD_check_diff(CLD_check_diff>=0))>50 ...
-            || abs(max(CLD_check)- CLD_max_coarse)>15 ...
-            || alpha_list_check(1) == alpha_list(index_CLD_max_coarse) ...
-            || alpha_list_check(end) == alpha_list(index_CLD_max_coarse)
-        % if more than 2 of the 5 pts dont converge
-        % if maximum difference between elements is bigger than 50
-        % if the original value is far away from the maximum value
-        CLD(index_CLD_max_coarse) = [];
-        CL(index_CLD_max_coarse) = [];
-        alpha_list(index_CLD_max_coarse) = [];
-    else
-        coarse_check_pass = 1;
-    end
-
-    if isempty(CLD) || coarse_check_counter > 40
-        alpha_CLD_max = NaN; CLD_max = NaN; alpha_stall = NaN; CL_max = NaN;
-        error_flag = 314;
-        return
-    end
-end
-
+[CLD_max_coarse,index_CLD_max_coarse] = max(CLD);
 [~,index_CL_max] = max(CL);
 miss_threshold=8;
-
 % CLD_max:
 [CLD_R,~,alpha_CLD_list_R,~] = xfoil_loop(alpha_list(index_CLD_max_coarse), ...
     alpha_list(min(index_CLD_max_coarse+alpha_count_fine_CLD,numel(alpha_list))), ...
@@ -185,4 +146,3 @@ while index_CL <= numel(alpha_CL_list)-1
         return
     end
 end
-
